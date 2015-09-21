@@ -1,0 +1,28 @@
+group 'us.juggl.demo.2015.october'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'us.juggl.demo.twentyfifteen.october.EchoServer'
+
+sourceCompatibility = 1.8
+
+repositories {
+//    mavenCentral()
+    maven  {
+        url "http://repo1.maven.org/maven2"
+    }
+//    maven {
+//        credentials {
+//            username 'admin'
+//            password 'admin123'
+//        }
+//        url 'https://nexus.zanclus.com/nexus/content/groups/public/'
+//    }
+}
+
+dependencies {
+    compile group: 'io.netty', name: 'netty-all', version: '4.0.+'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
