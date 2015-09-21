@@ -1,4 +1,4 @@
-package us.juggl.demo.twentyfifteen.october;
+package us.juggl.demo.netty;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;

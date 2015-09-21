@@ -4,7 +4,7 @@ version '1.0-SNAPSHOT'
 apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName = 'us.juggl.demo.twentyfifteen.october.EchoServer'
+mainClassName = 'us.juggl.demo.netty.EchoServer'
 
 sourceCompatibility = 1.8
 
