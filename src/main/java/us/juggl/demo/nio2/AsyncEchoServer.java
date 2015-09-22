@@ -27,6 +27,7 @@ public final class AsyncEchoServer implements Runnable{
     private AsynchronousChannelGroup asyncChannelGroup;
     private String name;
     private AsynchronousServerSocketChannel asyncServerSocketChannel;
+    private InetSocketAddress bindAddr;
 
     public final static int READ_MESSAGE_WAIT_TIME = 15;
     public final static int MESSAGE_INPUT_SIZE= 128;
@@ -37,10 +38,11 @@ public final class AsyncEchoServer implements Runnable{
         this.name = name;
         asyncChannelGroup = AsynchronousChannelGroup.withThreadPool(
                 Executors.newCachedThreadPool());
+        bindAddr = InetSocketAddress.createUnresolved("0.0.0.0", 9180);
     }
 
 
-    void open(InetSocketAddress serverAddress) throws IOException{
+    void open(InetSocketAddress serverAddress) throws IOException {
         // open a server channel and bind to a free address, then accept a connection
         LOG.info("Opening Aysnc ServerSocket channel at " + serverAddress);
         asyncServerSocketChannel = AsynchronousServerSocketChannel.open(asyncChannelGroup).bind(
@@ -50,6 +52,11 @@ public final class AsyncEchoServer implements Runnable{
     }
 
     public void run() {
+        try {
+            this.open(bindAddr);
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
         try {
             if (asyncServerSocketChannel.isOpen()) {
                 // The accept method does not block it sets up the CompletionHandler callback and moves on.
